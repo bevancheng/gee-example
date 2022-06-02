@@ -28,8 +28,8 @@ func FormatAsDate(t time.Time) string {
 }
 
 func main() {
-	r := gee.New()
-	r.Use(gee.Logger())
+
+	r := gee.Default()
 	r.SetFuncMap(template.FuncMap{
 		"FormatAsDate": FormatAsDate,
 	})
@@ -57,6 +57,10 @@ func main() {
 		})
 	})
 
+	r.GET("/panic", func(c *gee.Context) {
+		panic("I WANT PANIC!")
+
+	})
 	v1 := r.Group("/v1")
 	{
 
